@@ -44,7 +44,7 @@ var showProducts = function() {
     var products = results;
     for (var index = 0; index < products.length; index++) {
       console.log('Prod ID: ' + products[index].item_id + ' ' + products[index].product_name + ' $'+ products[index].price);
-      console.log('Department: ' + products[index].department_name + 'Sock Quantity: ' + products[index].stock_quantity);
+      console.log('Department: ' + products[index].department_name + ' Stock Quantity: ' + products[index].stock_quantity);
       console.log('----------------------- \n');
     }
 
@@ -117,5 +117,106 @@ var addProduct = function() {
     // logs the actual query being run
     // console.log(query.sql);
 
+  });
+};
+
+// View prodoct inventory if less than 10
+var viewLowInventory = function() {
+	connection.query('SELECT * FROM products WHERE stock_quantity < 10', function (error, results, fields) {
+	  if (error) throw error;
+	  
+    var products = results;
+    for (var index = 0; index < products.length; index++) {
+      console.log('Prod ID: ' + products[index].item_id + ' ' + products[index].product_name + ' $'+ products[index].price);
+      console.log('Department: ' + products[index].department_name + ' Stock Quantity: ' + products[index].stock_quantity);
+      console.log('----------------------- \n');
+    }
+
+    managerTask();
+
+	});
+};
+
+var addInventory = function() {
+
+  connection.query('SELECT * FROM products', function (error, results, fields) {
+	  if (error) throw error;
+	  
+    var products = results;
+  
+    inquirer.prompt([{
+      name: 'choice',
+      type: 'list',
+      pageSize: 100,
+      message: "What product would you like to Add Inventory?",
+      choices: function(value){
+        var productsArray =[];
+        // loop through products and return array for choices
+        for (var index = 0; index < products.length; index++) {
+          productsArray.push({
+            name:  products[index].product_name +' - $'+ products[index].price,
+            value: products[index].item_id,
+            short: products[index].product_name
+          });
+        }
+        return productsArray;
+      }
+    }]).then(function (answers) {
+
+      for (var index = 0; index < products.length; index++) {
+        if(products[index].item_id === answers.choice) {
+
+          // Store product purchased obj
+          var prodPurchased = products[index];
+          
+          // Ask User how many to buy
+          inquirer.prompt([{
+            name: 'choice',
+            type: 'input',
+            message: "How many units would you like to add?",
+            // Validate if value a number
+            validate: function(value) { 
+              if ( isNaN(value) ) { 
+                console.log('\n Please provide a number'); 
+                return false; 
+              } else if( value <= 0 ) {
+                console.log('\n Please provide a number greater than 0'); 
+                return false; 
+              } else {
+                return true;
+              }
+            },
+          }]).then(function (answers) {
+
+            // Store Qty
+            var addQty = answers.choice;
+            var newQty = parseInt(prodPurchased.stock_quantity)  +  parseInt(addQty);
+
+            // Update quantity purchased in DB
+            var query = connection.query(
+              "UPDATE products SET ? WHERE ?",
+              [
+                {
+                  stock_quantity: newQty 
+                },
+                {
+                  item_id:  prodPurchased.item_id
+                }
+              ],
+              function(err, res) {
+                if(err) throw err;
+                // console.log(res.affectedRows + " product updated!\n");
+              }
+            );
+          
+            // logs the actual query being run
+            // console.log(query.sql);
+            console.log('Inventory has been increased for ' + prodPurchased.product_name + ' New Inventory is: ' + newQty )
+
+          });
+        }
+      }
+
+    });
   });
 }

@@ -69,6 +69,7 @@ var purchaseProducts = function(products) {
 
           // Store Qty
           var prodQtyPurchased = answers.choice;
+          var newQty = parseInt(prodPurchased.stock_quantity) - parseInt(prodQtyPurchased);
 
           // Check if there's enough in stock
           if(prodPurchased.stock_quantity >= prodQtyPurchased) {
@@ -77,10 +78,10 @@ var purchaseProducts = function(products) {
               "UPDATE products SET ? WHERE ?",
               [
                 {
-                  stock_quantity: prodPurchased.stock_quantity - prodQtyPurchased
+                  stock_quantity: newQty
                 },
                 {
-                  item_id:  prodPurchased.item_id
+                  item_id: prodPurchased.item_id
                 }
               ],
               function(err, res) {
