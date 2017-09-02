@@ -68,13 +68,34 @@ var purchaseProducts = function(products) {
         }]).then(function (answers) {
 
           // Store Qty
-          var prodQty = answers.choice;
+          var prodQtyPurchased = answers.choice;
 
           // Check if there's enough in stock
-          if(prodPurchased.stock_quantity >= prodQty) {
-            console.log('There is enough to buy');
+          if(prodPurchased.stock_quantity >= prodQtyPurchased) {
+            // Update quantity purchased in DB
+            var query = connection.query(
+              "UPDATE products SET ? WHERE ?",
+              [
+                {
+                  stock_quantity: prodPurchased.stock_quantity - prodQtyPurchased
+                },
+                {
+                  item_id:  prodPurchased.item_id
+                }
+              ],
+              function(err, res) {
+                if(err) throw err;
+                // console.log(res.affectedRows + " product updated!\n");
+              }
+            );
+          
+            // logs the actual query being run
+            // console.log(query.sql);
+            console.log('Your Total Cost: ' + prodPurchased.price * prodQtyPurchased )
+
           } else {
-            console.log('Sorry Insufficient quantity!');
+            console.log('Sorry Insufficient quantity! \n');
+            purchaseProducts(products);
           }
 
         });
