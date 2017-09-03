@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mariomelchor/bamazon#readme",
   "dependencies": {
+    "console.table": "^0.9.1",
     "inquirer": "^3.2.2",
     "mysql": "^2.14.1"
   }
