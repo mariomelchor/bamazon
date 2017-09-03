@@ -100,8 +100,6 @@ var addProduct = function() {
     }
   },
   ]).then(function (answers) {
-
-    console.log("Inserting a new product...\n");
     var query = connection.query(
       "INSERT INTO products SET ?",
       {
@@ -111,11 +109,12 @@ var addProduct = function() {
         stock_quantity: answers.stock
       },
       function(err, res) {
-        console.log(res.affectedRows + " Product Inserted!\n");
+        console.log("\n\n New Product Added!\n");
       }
     );
     // logs the actual query being run
     // console.log(query.sql);
+    managerTask();
 
   });
 };
@@ -138,7 +137,6 @@ var viewLowInventory = function() {
 };
 
 var addInventory = function() {
-
   connection.query('SELECT * FROM products', function (error, results, fields) {
 	  if (error) throw error;
 	  
@@ -211,7 +209,8 @@ var addInventory = function() {
           
             // logs the actual query being run
             // console.log(query.sql);
-            console.log('Inventory has been increased for ' + prodPurchased.product_name + ' New Inventory is: ' + newQty )
+            console.log('\nInventory has been increased for ' + prodPurchased.product_name + ' New Inventory is: ' + newQty +'\n');
+            managerTask();
 
           });
         }

@@ -95,11 +95,12 @@ var purchaseProducts = function(products) {
           
             // logs the actual query being run
             // console.log(query.sql);
-            console.log('Your Total Cost: ' +  totalSale);
+            console.log('\nTotal Cost: $' +  totalSale + '\n');
+            showProducts();
 
           } else {
-            console.log('Sorry Insufficient quantity! \n');
-            purchaseProducts(products);
+            console.log('\nSorry Insufficient quantity!\n');
+            showProducts();
           }
 
         });
