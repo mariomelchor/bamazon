@@ -70,6 +70,8 @@ var purchaseProducts = function(products) {
           // Store Qty
           var prodQtyPurchased = answers.choice;
           var newQty = parseInt(prodPurchased.stock_quantity) - parseInt(prodQtyPurchased);
+          var totalSale = prodPurchased.price * parseInt(prodQtyPurchased);
+          var currentSales = prodPurchased.product_sales + totalSale;
 
           // Check if there's enough in stock
           if(prodPurchased.stock_quantity >= prodQtyPurchased) {
@@ -78,7 +80,8 @@ var purchaseProducts = function(products) {
               "UPDATE products SET ? WHERE ?",
               [
                 {
-                  stock_quantity: newQty
+                  stock_quantity: newQty,
+                  product_sales: currentSales
                 },
                 {
                   item_id: prodPurchased.item_id
@@ -92,7 +95,7 @@ var purchaseProducts = function(products) {
           
             // logs the actual query being run
             // console.log(query.sql);
-            console.log('Your Total Cost: ' + prodPurchased.price * prodQtyPurchased )
+            console.log('Your Total Cost: ' +  totalSale);
 
           } else {
             console.log('Sorry Insufficient quantity! \n');
