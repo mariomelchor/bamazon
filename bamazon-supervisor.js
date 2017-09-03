@@ -55,8 +55,6 @@ var createDepartment = function() {
       }
     }
   }]).then(function (answers) {
-
-    console.log("Inserting a new department...\n");
     var query = connection.query(
       "INSERT INTO departments SET ?",
       {
@@ -64,7 +62,9 @@ var createDepartment = function() {
         over_head_costs: answers.department_costs
       },
       function(err, res) {
-        console.log(res.affectedRows + "\n Product Inserted! \n");
+        if (error) throw error;
+        return;
+        console.log("\n\n" + answers.department_name +" "+ "Department Created \n");
       }
     );
     // logs the actual query being run
@@ -74,6 +74,7 @@ var createDepartment = function() {
   });
 };
 
+// Show table for Sales by Department
 var departmentSales = function() {
   // SQL Query String
   var sql = 'SELECT departments.department_id, departments.department_name, departments.over_head_costs, sum(products.product_sales) AS product_sales, sum(products.product_sales) - departments.over_head_costs AS total_profit ';
@@ -82,8 +83,11 @@ var departmentSales = function() {
       sql += 'GROUP BY departments.department_id';
 
   connection.query(sql, function (error, results, fields) {
-	  if (error) throw error;
-      console.log('\n');
+    if (error) throw error;
+    
+      console.log('\nSALES BY DEPARTMENT \n');
       console.table(results);
+
+      supervisorTask();
 	});
 };
