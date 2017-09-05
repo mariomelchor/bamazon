@@ -60,7 +60,7 @@ This will prompt you to Add a product. It will ask you for a product name prompt
 
 ![alt text](screenshots/manager/add-product/manager-screenshot-1.jpg "Screenshot Product Name")
 
-![alt text](screenshots/manager/add-product/manager-screenshot-2.jpg "Screenshot Product Name"")
+![alt text](screenshots/manager/add-product/manager-screenshot-2.jpg "Screenshot Product Name")
 
 ![alt text](screenshots/manager/add-product/manager-screenshot-3.jpg "Screenshot Product Category")
 
