@@ -30,9 +30,11 @@ Running `node bamazon-customer.js` will display a list of products for purchase 
 
 Running `node bamazon-manager.js` will display 4 options View Products for Sale, View Low Inventory, Add to Inventory, and Add New Product
 
+![alt text](screenshots/manager/manager-screenshot-task.jpg "Screenshot Manager Task")
+
 ### View Products for Sale
 
-It will display a list of all products for sale the Product ID, Product Title, Product Price, Product Department, and Quantity
+It will display a list of all products for sale with the Product ID, Product Title, Product Price, Product Department, and Product Quantity
 
 ![alt text](screenshots/manager/for-sale/manager-screenshot-1.jpg "Screenshot Products for Sale")
 
@@ -44,7 +46,7 @@ It will display a list of all products that have an inventory of less than 10
 
 ### Add to Inventory
 
-It will display a list of all products and allow you to select a product. Once a product is selected it will prompt you to add a number of units to add and then display how much inventory this product has. 
+It will display a list of all products and allow you to select a product. Once a product is selected it will prompt you to add a number of units to add and then display how much inventory this product now has
 
 ![alt text](screenshots/manager/add-inventory/manager-screenshot-1.jpg "Screenshot Select Product")
 
