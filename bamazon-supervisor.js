@@ -62,8 +62,7 @@ var createDepartment = function() {
         over_head_costs: answers.department_costs
       },
       function(err, res) {
-        if (error) throw error;
-        return;
+        if (err) throw err;
         console.log("\n\n" + answers.department_name +" "+ "Department Created \n");
       }
     );
