@@ -87,10 +87,8 @@ This will display a table that shows Product Sales by Department
 
 This will allow you to create a New Department it will prompt you for a Department Name and Overhead Costs it will then confirm if the Department was created.
 
-![alt text](screenshots/supervisor/create-department/supervisor-screenshot-1.jpg "Screenshot Sales by Department")
+![alt text](screenshots/supervisor/create-department/supervisor-screenshot-1.jpg "Screenshot Create New Department")
 
-![alt text](screenshots/supervisor/create-department/supervisor-screenshot-2.jpg "Screenshot Sales by Department")
+![alt text](screenshots/supervisor/create-department/supervisor-screenshot-2.jpg "Screenshot Department Overhead Costs")
 
-![alt text](screenshots/supervisor/create-department/supervisor-screenshot-3.jpg "Screenshot Sales by Department")
-
-![alt text](screenshots/supervisor/create-department/supervisor-screenshot-4.jpg "Screenshot Sales by Department")
+![alt text](screenshots/supervisor/create-department/supervisor-screenshot-3.jpg "Screenshot Confirm New Department")
