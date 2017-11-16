@@ -1,4 +1,6 @@
-# bamazon
+# Bamazon
+
+Node.js App using MySql. Bamazon replicates eCommerce functionality which allows users to view products listed and mimics products being purchased. This App also has special privileges for Managers/Supervisors which allows the ability to Update Inventory, Create New Products, and View Sales by Department.
 
 ## Running the App
 
